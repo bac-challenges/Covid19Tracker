@@ -20,7 +20,7 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: 126716DC-4ADE-4418-BDA0-D53D0A26AC3D
+//	ID: DAE31051-A244-42DC-8066-1893AED80CCE
 //
 //	Pkg: App
 //
@@ -30,53 +30,47 @@
 //
 
 import Foundation
+import CoreLocation
 
-enum WHOEndPoint: EndPoint {
+class LocationManager: NSObject, CLLocationManagerDelegate {
 	
-	case search
-	case readme(repo: String)
+	static let shared = LocationManager()
 	
-	var baseURL: URL {
-		return URL(string: "https://api.github.com/")!
+	var manager: CLLocationManager?
+	
+	override private init() {
+		
+		super.init()
+		
+		manager = CLLocationManager()
+		manager?.delegate = self
+		manager?.requestAlwaysAuthorization()
+		manager?.requestLocation()
 	}
 	
-	var path: String {
-		switch self {
-		case .search: return "search/repositories"
-		case .readme(let repo): return "repos/\(repo)/readme"
-		}
-	}
-	
-	var httpMethod: HTTPMethod {
-		switch self {
-		default: return .GET
-		}
-	}
-}
-
-struct Response: Codable {
-	
-}
-
-struct WHOService {
-	
-	private let service = Service()
-	
-	func search(query: String) {
-				
-		if query != "" && query.count > 3 {
-			service.fetch(endpoint: WHOEndPoint.search, params: ["q": query]) { (result: Result<Response, ServiceError>) in
-				DispatchQueue.main.sync {
-					switch result {
-					case .success(let response):
-//						self.items = response.items.map { repository in
-//							RepositoryViewModel(source: repository)
-//						}
-						print(response)
-					case .failure(let error): print(error)
-					}
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		if status == .authorizedAlways || status == .authorizedWhenInUse {
+			if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
+				if CLLocationManager.isRangingAvailable() {
+					print("location")
 				}
 			}
 		}
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		if let location = locations.first {
+			
+			let geocoder = CLGeocoder()
+			geocoder.reverseGeocodeLocation(location) { (result, error) in
+				if let placemark = result?[0] {
+					print("Found user's location: \(placemark.isoCountryCode!)")
+				}
+			}
+		}
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+		print("Failed to find user's location: \(error.localizedDescription)")
 	}
 }
