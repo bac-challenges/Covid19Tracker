@@ -20,41 +20,48 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: A7ACC66C-A2BC-44AB-A1A3-149DBA99955E
+//	ID: 0498FFA5-6347-4EF1-B13E-2F2956421DFC
 //
 //	Pkg: App
 //
-//	Swift: 5
+//	Swift: 5.0 
 //
 //	MacOS: 10.15
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct PagerView<Content: View>: View {
+	let pageCount: Int
+	@Binding var currentIndex: Int
+	let content: Content
 	
-	@State private var currentPageIndex = 0
+	@GestureState private var translation: CGFloat = 0
+	
+	init(pageCount: Int, currentIndex: Binding<Int>, @ViewBuilder content: () -> Content) {
+		self.pageCount = pageCount
+		self._currentIndex = currentIndex
+		self.content = content()
+	}
 	
 	var body: some View {
-		VStack() {
-			Text("Latest Situation Reports")
-				.font(.title)
-				.fontWeight(.bold)
-				.foregroundColor(.blue)
-				.padding(.top)
-				.padding(.bottom)
-			
-			CardPagerView()
-	
-			Image("Logo").padding(.top, 180)
-			
-			Spacer()
+		GeometryReader { geometry in
+			HStack(spacing: 0) {
+				self.content.frame(width: geometry.size.width)
+			}
+			.frame(width: geometry.size.width, alignment: .leading)
+			.offset(x: -CGFloat(self.currentIndex) * geometry.size.width)
+			.offset(x: self.translation)
+			.animation(.interactiveSpring())
+			.gesture(
+				DragGesture().updating(self.$translation) { value, state, _ in
+					state = value.translation.width
+				}.onEnded { value in
+					let offset = value.translation.width / geometry.size.width
+					let newIndex = (CGFloat(self.currentIndex) - offset).rounded()
+					self.currentIndex = min(max(Int(newIndex), 0), self.pageCount - 1)
+				}
+			)
 		}
 	}
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
 }

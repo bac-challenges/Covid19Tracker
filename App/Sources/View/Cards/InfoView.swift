@@ -20,41 +20,52 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: A7ACC66C-A2BC-44AB-A1A3-149DBA99955E
+//	ID: 572F8FA6-235B-4E64-8A9E-A346B01A67CD
 //
 //	Pkg: App
 //
-//	Swift: 5
+//	Swift: 5.0 
 //
 //	MacOS: 10.15
 //
 
 import SwiftUI
 
-struct ContentView: View {
-	
-	@State private var currentPageIndex = 0
-	
+struct InfoView: View {
 	var body: some View {
-		VStack() {
-			Text("Latest Situation Reports")
-				.font(.title)
-				.fontWeight(.bold)
-				.foregroundColor(.blue)
-				.padding(.top)
-				.padding(.bottom)
+		ZStack(alignment: .leading) {
 			
-			CardPagerView()
-	
-			Image("Logo").padding(.top, 180)
+			Image("Info")
 			
-			Spacer()
-		}
+			VStack(alignment: .leading) {
+				Text("UK's Situation in Numbers")
+					.foregroundColor(.white)
+					.font(.footnote)
+					.padding(.bottom)
+				
+				Text("312,213")
+					.foregroundColor(.white)
+					.font(.largeTitle)
+					.bold()
+					.padding(.top)
+				
+				Text("Confirmed Cases")
+					.foregroundColor(.white)
+					.padding(.bottom)
+
+				
+				Text("21,132 Total Deaths")
+					.foregroundColor(.white)
+					.font(.footnote)
+					.padding(.top)
+				
+			}.padding()
+		}.shadow(color: .gray, radius: 5)
 	}
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct InfoView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        InfoView()
     }
 }

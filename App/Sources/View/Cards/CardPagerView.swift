@@ -20,41 +20,35 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: A7ACC66C-A2BC-44AB-A1A3-149DBA99955E
+//	ID: 56ACA9C1-E43B-4421-AE70-25A5AD1431E1
 //
 //	Pkg: App
 //
-//	Swift: 5
+//	Swift: 5.0 
 //
 //	MacOS: 10.15
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct CardPagerView: View {
 	
 	@State private var currentPageIndex = 0
 	
-	var body: some View {
-		VStack() {
-			Text("Latest Situation Reports")
-				.font(.title)
-				.fontWeight(.bold)
-				.foregroundColor(.blue)
-				.padding(.top)
-				.padding(.bottom)
+    var body: some View {
+		VStack(spacing: 0) {			
+			PagerView(pageCount: 2, currentIndex: $currentPageIndex) {
+				DashboardView()
+				InfoView()
+			}.frame(height: 200)
 			
-			CardPagerView()
-	
-			Image("Logo").padding(.top, 180)
-			
-			Spacer()
+			PageControl(numberOfPages: 2, currentPageIndex: $currentPageIndex)
 		}
-	}
+    }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct CardPagerView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        CardPagerView()
     }
 }

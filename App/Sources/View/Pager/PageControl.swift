@@ -20,41 +20,36 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: A7ACC66C-A2BC-44AB-A1A3-149DBA99955E
+//	ID: B634F60C-A056-401D-B44D-F95E474444D0
 //
 //	Pkg: App
 //
-//	Swift: 5
+//	Swift: 5.0 
 //
 //	MacOS: 10.15
 //
 
+import Foundation
+import UIKit
 import SwiftUI
 
-struct ContentView: View {
+struct PageControl: UIViewRepresentable {
 	
-	@State private var currentPageIndex = 0
+	var numberOfPages: Int
 	
-	var body: some View {
-		VStack() {
-			Text("Latest Situation Reports")
-				.font(.title)
-				.fontWeight(.bold)
-				.foregroundColor(.blue)
-				.padding(.top)
-				.padding(.bottom)
-			
-			CardPagerView()
+	@Binding var currentPageIndex: Int
 	
-			Image("Logo").padding(.top, 180)
-			
-			Spacer()
-		}
+	func makeUIView(context: Context) -> UIPageControl {
+		let control = UIPageControl()
+		control.numberOfPages = numberOfPages
+		control.currentPageIndicatorTintColor = .secondaryLabel
+		control.pageIndicatorTintColor = .lightGray
+		
+		return control
 	}
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+	
+	func updateUIView(_ uiView: UIPageControl, context: Context) {
+		uiView.currentPage = currentPageIndex
+	}
+	
 }
