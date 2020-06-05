@@ -24,7 +24,7 @@
 //
 //	Pkg: App
 //
-//	Swift: 5
+//	Swift: 5.0
 //
 //	MacOS: 10.15
 //
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		
-		LocationManager.shared
+		let _ = LocationManager.shared
 		
 		return true
 	}

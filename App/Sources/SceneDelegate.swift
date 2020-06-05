@@ -24,7 +24,7 @@
 //
 //	Pkg: App
 //
-//	Swift: 5
+//	Swift: 5.0
 //
 //	MacOS: 10.15
 //

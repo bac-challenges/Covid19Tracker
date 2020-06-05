@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>geometryType</key>
+	<string>esriGeometryEnvelope</string>
+	<key>spatialRel</key>
+	<string>esriSpatialRelIntersects</string>
+	<key>resultType</key>
+	<string>none</string>
+	<key>distance</key>
+	<string>0.0</string>
+	<key>units</key>
+	<string>esriSRUnit_Meter</string>
+	<key>returnGeodetic</key>
+	<string>false</string>
+	<key>outFields</key>
+	<string>CumCase,CumDeath</string>
+	<key>returnHiddenFields</key>
+	<string>false</string>
+	<key>returnGeometry</key>
+	<string>false</string>
+	<key>featureEncoding</key>
+	<string>esriDefault</string>
+	<key>multipatchOption</key>
+	<string>xyFootprint</string>
+	<key>applyVCSProjection</key>
+	<string>false</string>
+	<key>returnIdsOnly</key>
+	<string>false</string>
+	<key>returnUniqueIdsOnly</key>
+	<string>false</string>
+	<key>returnCountOnly</key>
+	<string>false</string>
+	<key>returnExtentOnly</key>
+	<string>false</string>
+	<key>returnQueryGeometry</key>
+	<string>false</string>
+	<key>returnDistinctValues</key>
+	<string>false</string>
+	<key>cacheHint</key>
+	<string>false</string>
+	<key>orderByFields</key>
+	<string>date_epicrv+DESC</string>
+	<key>resultRecordCount</key>
+	<string>1</string>
+	<key>returnZ</key>
+	<string>false</string>
+	<key>returnM</key>
+	<string>false</string>
+	<key>returnExceededLimitFeatures</key>
+	<string>false</string>
+	<key>sqlFormat</key>
+	<string>none</string>
+	<key>f</key>
+	<string>pjson</string>
+</dict>
+</plist>

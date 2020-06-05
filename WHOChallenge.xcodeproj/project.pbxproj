@@ -13,6 +13,8 @@
 		6035DA88248AB77800D0EF16 /* CardPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6035DA87248AB77800D0EF16 /* CardPagerView.swift */; };
 		6035DA8A248ABA2200D0EF16 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6035DA89248ABA2200D0EF16 /* PageControl.swift */; };
 		607A4023248ABFFE00B3BEF3 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607A4022248ABFFE00B3BEF3 /* PagerView.swift */; };
+		609351F5248AD7E500EEF88A /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609351F4248AD7E500EEF88A /* Bundle.swift */; };
+		609351F7248AD87C00EEF88A /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 609351F6248AD87C00EEF88A /* Config.plist */; };
 		609B874B248A39540020B77E /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609B874A248A39540020B77E /* Service.swift */; };
 		609B8755248A592F0020B77E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609B8754248A592F0020B77E /* DataManager.swift */; };
 		60C7CAB524880B4800BF5225 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C7CAB424880B4800BF5225 /* AppDelegate.swift */; };
@@ -31,6 +33,8 @@
 		6035DA87248AB77800D0EF16 /* CardPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPagerView.swift; sourceTree = "<group>"; };
 		6035DA89248ABA2200D0EF16 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		607A4022248ABFFE00B3BEF3 /* PagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
+		609351F4248AD7E500EEF88A /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		609351F6248AD87C00EEF88A /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		609B874A248A39540020B77E /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		609B8754248A592F0020B77E /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		60C7CAB224880B4700BF5225 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +98,7 @@
 		609B8750248A52D90020B77E /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				609351F4248AD7E500EEF88A /* Bundle.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 				60C7CABA24880B4D00BF5225 /* Assets.xcassets */,
 				60C7CABF24880B4D00BF5225 /* LaunchScreen.storyboard */,
 				60C7CAC224880B4D00BF5225 /* Info.plist */,
+				609351F6248AD87C00EEF88A /* Config.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -235,6 +241,7 @@
 				60C7CAC124880B4D00BF5225 /* LaunchScreen.storyboard in Resources */,
 				60C7CABE24880B4D00BF5225 /* Preview Assets.xcassets in Resources */,
 				60DA590B248A33AC004DD68D /* README.md in Resources */,
+				609351F7248AD87C00EEF88A /* Config.plist in Resources */,
 				60C7CABB24880B4D00BF5225 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6035DA8A248ABA2200D0EF16 /* PageControl.swift in Sources */,
+				609351F5248AD7E500EEF88A /* Bundle.swift in Sources */,
 				607A4023248ABFFE00B3BEF3 /* PagerView.swift in Sources */,
 				6035DA84248AA2B900D0EF16 /* InfoView.swift in Sources */,
 				60C7CAB524880B4800BF5225 /* AppDelegate.swift in Sources */,

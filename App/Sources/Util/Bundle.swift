@@ -20,41 +20,34 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: A7ACC66C-A2BC-44AB-A1A3-149DBA99955E
+//	ID: 5E55187B-20FB-4700-AF70-F4835B569256
 //
 //	Pkg: App
 //
-//	Swift: 5.0
+//	Swift: 5.0 
 //
 //	MacOS: 10.15
 //
 
-import SwiftUI
+import Foundation
 
-struct ContentView: View {
+extension Bundle {
 	
-	@State private var currentPageIndex = 0
-	
-	var body: some View {
-		VStack() {
-			Text("Latest Situation Reports")
-				.font(.title)
-				.fontWeight(.bold)
-				.foregroundColor(.blue)
-				.padding(.top)
-				.padding(.bottom)
-			
-			CardPagerView()
-	
-			Image("Logo").padding(.top, 180)
-			
-			Spacer()
+	static var config:[String: String]? {
+		
+		guard let path = self.main.path(forResource: "Config", ofType: "plist") else {
+			print("Error loading configuration")
+			return nil
 		}
+		
+		let url = URL(fileURLWithPath: path)
+		let data = try! Data(contentsOf: url)
+		
+		guard let config = try! PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [String: String] else {
+			print("Error decoding configuration")
+			return nil
+		}
+		
+		return config
 	}
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
 }
