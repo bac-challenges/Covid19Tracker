@@ -20,45 +20,18 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: A7ACC66C-A2BC-44AB-A1A3-149DBA99955E
+//	ID: 4CFF3729-65C2-4B52-A52C-9E0BAEB389C2
 //
 //	Pkg: App
 //
-//	Swift: 5.0
+//	Swift: 5.0 
 //
 //	MacOS: 10.15
 //
 
-import UIKit
-import SwiftUI
+import Foundation
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-	var window: UIWindow?
-
-
-	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
-		// Create the SwiftUI view that provides the window contents.
-		let contentView = ContentView()
-
-		// Use a UIHostingController as window root view controller.
-		if let windowScene = scene as? UIWindowScene {
-		    let window = UIWindow(windowScene: windowScene)
-		    window.rootViewController = UIHostingController(rootView: contentView)
-		    self.window = window
-		    window.makeKeyAndVisible()
-		}
-	}
-
-	func sceneDidDisconnect(_ scene: UIScene) {}
-
-	func sceneDidBecomeActive(_ scene: UIScene) {}
-
-	func sceneWillResignActive(_ scene: UIScene) {}
-
-	func sceneWillEnterForeground(_ scene: UIScene) {}
-
-	func sceneDidEnterBackground(_ scene: UIScene) {}
+struct Statistics: Codable {
+	let cases: Int
+	let deaths: Int
 }
-

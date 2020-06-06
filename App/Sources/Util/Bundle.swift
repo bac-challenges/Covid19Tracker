@@ -33,7 +33,7 @@ import Foundation
 
 extension Bundle {
 	
-	static var config:[String: String]? {
+	static func config(_ country: String) -> [String: String]? {
 		
 		guard let path = self.main.path(forResource: "Config", ofType: "plist") else {
 			print("Error loading configuration")
@@ -43,10 +43,12 @@ extension Bundle {
 		let url = URL(fileURLWithPath: path)
 		let data = try! Data(contentsOf: url)
 		
-		guard let config = try! PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [String: String] else {
+		guard var config = try! PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [String: String] else {
 			print("Error decoding configuration")
 			return nil
 		}
+		
+		config["where"] = "ISO_2_CODE='\(country)'"
 		
 		return config
 	}

@@ -34,16 +34,14 @@ import Foundation
 enum WHOEndPoint: EndPoint {
 	
 	case search
-	case readme(repo: String)
 	
 	var baseURL: URL {
-		return URL(string: "https://api.github.com/")!
+		return URL(string: "https://services.arcgis.com/5T5nSi527N4F7luB/arcgis/rest/services/")!
 	}
 	
 	var path: String {
 		switch self {
-		case .search: return "search/repositories"
-		case .readme(let repo): return "repos/\(repo)/readme"
+		case .search: return "COVID19_hist_cases_adm0_v5_view/FeatureServer/0/query"
 		}
 	}
 	
@@ -56,23 +54,36 @@ enum WHOEndPoint: EndPoint {
 
 struct Response: Codable {
 	
+	let features: [Feature]
+	
+	struct Feature: Codable {
+		let attributes: [String: Int]
+	}
 }
 
 struct DataManager {
 	
 	private let service = Service()
 	
-	func search(query: String) {
-				
-		if query != "" && query.count > 3 {
-			service.fetch(endpoint: WHOEndPoint.search, params: ["q": query]) { (result: Result<Response, ServiceError>) in
+	func search(country: String = "US", completionHandler: @escaping (Statistics) -> Void) {
+		
+		guard let params = Bundle.config(country) else {
+			return 
+		}
+		
+		if country != "" && country.count == 2 {
+			service.fetch(endpoint: WHOEndPoint.search, params: params) { (result: Result<Response, ServiceError>) in
 				DispatchQueue.main.sync {
 					switch result {
 					case .success(let response):
-//						self.items = response.items.map { repository in
-//							RepositoryViewModel(source: repository)
-//						}
-						print(response)
+						if let attributes = response.features.first?.attributes {
+						
+							let statistics = Statistics(cases: attributes["CumCase"] ?? 0,
+														deaths: attributes["CumDeath"] ?? 0)
+							
+							completionHandler(statistics)
+						}
+
 					case .failure(let error): print(error)
 					}
 				}
