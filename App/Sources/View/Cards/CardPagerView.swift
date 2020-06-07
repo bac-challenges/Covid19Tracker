@@ -33,6 +33,8 @@ import SwiftUI
 
 struct CardPagerView: View {
 	
+	@State var statistics: Statistics
+	
 	@State private var currentPageIndex = 0
 	
     var body: some View {
@@ -49,6 +51,6 @@ struct CardPagerView: View {
 
 struct CardPagerView_Previews: PreviewProvider {
     static var previews: some View {
-        CardPagerView()
+		CardPagerView(statistics: Statistics(cases: 0, deaths: 0))
     }
 }

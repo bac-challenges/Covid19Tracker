@@ -61,7 +61,10 @@ struct Response: Codable {
 	}
 }
 
-struct DataManager {
+final class DataManager {
+	
+	static let shared = DataManager()
+	private init() {}
 	
 	private let service = Service()
 	
@@ -77,7 +80,6 @@ struct DataManager {
 					switch result {
 					case .success(let response):
 						if let attributes = response.features.first?.attributes {
-						
 							let statistics = Statistics(cases: attributes["CumCase"] ?? 0,
 														deaths: attributes["CumDeath"] ?? 0)
 							

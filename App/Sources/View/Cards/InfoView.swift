@@ -32,18 +32,21 @@
 import SwiftUI
 
 struct InfoView: View {
+	
+	@EnvironmentObject var model: ContentViewModel
+	
 	var body: some View {
 		ZStack(alignment: .leading) {
 			
 			Image("Info")
 			
 			VStack(alignment: .leading) {
-				Text("UK's Situation in Numbers")
+				Text("\(model.country)'s Situation in Numbers")
 					.foregroundColor(.white)
 					.font(.footnote)
 					.padding(.bottom)
 				
-				Text("312,213")
+				Text("\(model.statistics.cases)")
 					.foregroundColor(.white)
 					.font(.largeTitle)
 					.bold()
@@ -51,10 +54,11 @@ struct InfoView: View {
 				
 				Text("Confirmed Cases")
 					.foregroundColor(.white)
+					.font(.footnote)
 					.padding(.bottom)
 
 				
-				Text("21,132 Total Deaths")
+				Text("\(model.statistics.deaths) Total Deaths")
 					.foregroundColor(.white)
 					.font(.footnote)
 					.padding(.top)
@@ -66,6 +70,6 @@ struct InfoView: View {
 
 struct InfoView_Previews: PreviewProvider {
     static var previews: some View {
-        InfoView()
+		InfoView()
     }
 }

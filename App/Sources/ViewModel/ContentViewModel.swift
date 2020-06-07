@@ -20,35 +20,36 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: A7ACC66C-A2BC-44AB-A1A3-149DBA99955E
+//	ID: 368E7A9A-8241-4393-B6D5-A71AECB7121E
 //
 //	Pkg: App
 //
-//	Swift: 5.0
+//	Swift: 5.0 
 //
 //	MacOS: 10.15
 //
 
-import UIKit
 import SwiftUI
+import Combine
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+final class ContentViewModel: ObservableObject {
 
-	var window: UIWindow?
+	let objectWillChange = PassthroughSubject<Void, Never>()
 
-
-	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
-		// Create the SwiftUI view that provides the window contents.
-		let contentView = ContentView().environmentObject(ContentViewModel())
-
-		// Use a UIHostingController as window root view controller.
-		if let windowScene = scene as? UIWindowScene {
-		    let window = UIWindow(windowScene: windowScene)
-			window.rootViewController = UIHostingController(rootView: contentView)
-		    self.window = window
-		    window.makeKeyAndVisible()
+	var statistics: Statistics = Statistics(cases: 0, deaths: 0) {
+		didSet { objectWillChange.send() }
+	}
+	
+	var country: String = "UK" {
+		didSet { objectWillChange.send() }
+	}
+	
+	func fetch() {
+		LocationManager.shared.getLocation { [weak self] country in
+			self?.country = country
+			DataManager.shared.search(country: country) { statistics in
+				self?.statistics = statistics
+			}
 		}
 	}
 }
-

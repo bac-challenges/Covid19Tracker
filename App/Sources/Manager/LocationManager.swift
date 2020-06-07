@@ -32,19 +32,28 @@
 import Foundation
 import CoreLocation
 
-class LocationManager: NSObject, CLLocationManagerDelegate {
+final class LocationManager: NSObject, CLLocationManagerDelegate {
 	
 	static let shared = LocationManager()
 	
 	var manager: CLLocationManager?
+	var callback: ((String) -> Void)?
 	
+	@discardableResult
 	override private init() {
 		
 		super.init()
 		
 		manager = CLLocationManager()
 		manager?.delegate = self
+	}
+	
+	func requestAlwaysAuthorization() {
 		manager?.requestAlwaysAuthorization()
+	}
+	
+	func getLocation(callback: @escaping (String) -> Void) {
+		self.callback = callback
 		manager?.requestLocation()
 	}
 	
@@ -52,9 +61,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 		if status == .authorizedAlways || status == .authorizedWhenInUse {
 			if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
 				if CLLocationManager.isRangingAvailable() {
-					print("location")
+					print("Core Location Avaliable")
 				}
 			}
+		}
+		else {
+			print("Core Location Unavaliable")
 		}
 	}
 	
@@ -64,7 +76,16 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 			let geocoder = CLGeocoder()
 			geocoder.reverseGeocodeLocation(location) { (result, error) in
 				if let placemark = result?[0] {
-					print("Found user's location: \(placemark.isoCountryCode!)")
+					
+					guard let location = placemark.isoCountryCode else {
+						return
+					}
+					
+					print("Found user's location: \(location)")
+					
+					if let callback = self.callback {
+						callback(location)
+					}
 				}
 			}
 		}

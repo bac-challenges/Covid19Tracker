@@ -33,7 +33,7 @@ import SwiftUI
 
 struct ContentView: View {
 	
-	@State private var currentPageIndex = 0
+	@EnvironmentObject var model: ContentViewModel
 	
 	var body: some View {
 		VStack() {
@@ -44,8 +44,10 @@ struct ContentView: View {
 				.padding(.top)
 				.padding(.bottom)
 			
-			CardPagerView()
-	
+			CardPagerView(statistics: model.statistics).onAppear {
+				self.model.fetch()
+			}
+
 			Image("Logo").padding(.top, 180)
 			
 			Spacer()

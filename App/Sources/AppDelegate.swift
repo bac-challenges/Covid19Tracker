@@ -35,13 +35,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-		
-		//let _ = LocationManager.shared
-		let data = DataManager()
-		data.search { result in
-			print(result)
-		}
-		
+		LocationManager.shared.requestAlwaysAuthorization()
 		return true
 	}
 
